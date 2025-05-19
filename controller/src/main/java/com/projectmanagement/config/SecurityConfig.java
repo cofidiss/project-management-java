@@ -1,25 +1,27 @@
-package com.multimodule.config;
+package com.projectmanagement.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 
+
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableAspectJAutoProxy
 @Configuration
-@EnableWebSecurity
 public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // CSRF devre dışı
-                .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()  // tüm isteklere izin ver
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll() // Allow all requests
                 )
-                .httpBasic(Customizer.withDefaults()); // basic auth (zorunlu değil ama log için basit)
-
+                .csrf().disable() // Disable CSRF protection
+                .formLogin().disable();
         return http.build();
     }
 }

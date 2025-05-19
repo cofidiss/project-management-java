@@ -1,4 +1,7 @@
 spring:
+  aop:
+    auto: true
+    proxy-target-class: true
   datasource:
     url: jdbc:postgresql://localhost:5432/project_management
     username: postgres
@@ -8,3 +11,11 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui
+
