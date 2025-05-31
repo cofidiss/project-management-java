@@ -1,5 +1,7 @@
 package com.projectmanagement.controller;
 
+import com.enums.RoleEnum;
+import com.projectmanagement.annotaiton.RequirePermission;
 import com.projectmanagement.service.DTO.LoginRequestDto;
 import com.projectmanagement.service.DTO.SignUpRequestDto;
 import com.projectmanagement.service.interfaces.IUserService;
@@ -33,7 +35,7 @@ public class UserController {
         }
         return "Signup Unsuccessful";
     }
-
+    @RequirePermission(RoleEnum.ADD)
     @PostMapping("/test")
     public String test( HttpServletResponse response) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

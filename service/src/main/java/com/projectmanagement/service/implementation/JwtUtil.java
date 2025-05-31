@@ -28,7 +28,7 @@ this.jwtConfig = jwtConfig;
     public Long extractUserId(String token) {
         try {
           return  Long.parseLong(extractAllClaims(token).getSubject());
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             return null;
         }
     }

@@ -21,4 +21,4 @@ springdoc:
 security:
   jwt:
     secret: 1234567890
-    expirationTime: 100000
+    expirationTime: 30000

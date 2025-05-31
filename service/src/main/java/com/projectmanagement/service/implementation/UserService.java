@@ -1,5 +1,6 @@
 package com.projectmanagement.service.implementation;
 
+import com.enums.RoleEnum;
 import com.projectmanagement.domain.entity.UserEntity;
 import com.projectmanagement.domain.model.GenericApiResponse;
 import com.projectmanagement.domain.util.CustomUtil;
@@ -58,5 +59,12 @@ private  JwtUtil jwtUtil;
             apiResponse.setSuccessData(userOpt.get().getId().toString());
         }
         return apiResponse;
+    }
+
+    @Override
+    public boolean hasPermission(Long userId, RoleEnum required) {
+       var optUser =  userRepository.findById(userId);
+        return  optUser.filter(user -> (user.getRoleId()  & required.getBit() ) !=0).isPresent();
+
     }
 }
