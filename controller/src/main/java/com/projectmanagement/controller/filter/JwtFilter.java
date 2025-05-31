@@ -1,4 +1,4 @@
-package com.projectmanagement.filter;
+package com.projectmanagement.controller.filter;
 
 import com.projectmanagement.service.config.CustomUserDetail;
 import com.projectmanagement.service.implementation.CustomUserDetailsService;

@@ -1,6 +1,6 @@
 package com.projectmanagement.service.interfaces;
 
-import com.enums.RoleEnum;
+import com.projectmanagement.domain.enums.RoleEnum;
 import com.projectmanagement.domain.model.GenericApiResponse;
 import com.projectmanagement.service.DTO.SignUpRequestDto;
 

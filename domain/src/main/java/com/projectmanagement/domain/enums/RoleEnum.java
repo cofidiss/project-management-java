@@ -1,4 +1,4 @@
-package com.enums;
+package com.projectmanagement.domain.enums;
 
 import java.util.ArrayList;
 import java.util.List;

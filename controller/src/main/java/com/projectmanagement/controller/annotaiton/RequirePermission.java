@@ -1,6 +1,6 @@
-package com.projectmanagement.annotaiton;
+package com.projectmanagement.controller.annotaiton;
 
-import com.enums.RoleEnum;
+import com.projectmanagement.domain.enums.RoleEnum;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

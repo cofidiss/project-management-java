@@ -1,6 +1,6 @@
-package com.projectmanagement.config;
+package com.projectmanagement.controller.config;
 
-import com.projectmanagement.interceptor.PermissionInterceptor;
+import com.projectmanagement.controller.interceptor.PermissionInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;

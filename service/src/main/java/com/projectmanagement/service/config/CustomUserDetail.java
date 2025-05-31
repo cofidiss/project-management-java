@@ -1,11 +1,9 @@
 package com.projectmanagement.service.config;
 
-import com.enums.RoleEnum;
+import com.projectmanagement.domain.enums.RoleEnum;
 import com.projectmanagement.domain.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;

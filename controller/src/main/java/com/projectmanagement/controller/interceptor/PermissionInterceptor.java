@@ -1,12 +1,11 @@
-package com.projectmanagement.interceptor;
+package com.projectmanagement.controller.interceptor;
 
-import com.enums.RoleEnum;
-import com.projectmanagement.annotaiton.RequirePermission;
+import com.projectmanagement.domain.enums.RoleEnum;
+import com.projectmanagement.controller.annotaiton.RequirePermission;
 import com.projectmanagement.service.interfaces.IUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
