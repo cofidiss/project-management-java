@@ -15,10 +15,11 @@ import java.util.Optional;
 public class UserService implements IUserService {
     private IUserMapper userMapper;
     private IUserRepository userRepository;
-
-    public UserService(IUserMapper userMapper, IUserRepository userRepository) {
+private  JwtUtil jwtUtil;
+    public UserService(IUserMapper userMapper, IUserRepository userRepository, JwtUtil jwtUtil) {
         this.userMapper = userMapper;
         this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
     }
 
     @Override
@@ -28,7 +29,7 @@ public class UserService implements IUserService {
                 .filter(user -> verifyPassword(password, user.getPassword()));
 
       if(userOpt.isPresent()){
-          apiResponse.setSuccessData(userOpt.get().getId().toString());
+          apiResponse.setSuccessData(jwtUtil.generateToken( userOpt.get().getId()));
       }
       else {
           apiResponse.setErrorData("login unsuccess");
