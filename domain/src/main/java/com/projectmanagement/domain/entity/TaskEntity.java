@@ -27,7 +27,11 @@ public class TaskEntity {
 
     @Column(name = "actual_end_date")
     private LocalDateTime actualEndDate;
+    @Column(name = "planned_start_date")
+    private LocalDateTime plannedStartDate;
 
+    @Column(name = "planned_end_date")
+    private LocalDateTime plannedEndDate;
     // Relations
 
     @JoinColumn(name = "project_id")

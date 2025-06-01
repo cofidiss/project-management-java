@@ -3,7 +3,9 @@ package com.projectmanagement.domain.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.sql.Date;
 
 @Data
 @Entity
@@ -15,18 +17,21 @@ public class ProjectEntity {
 
     private String name;
 
-    @Column(name = "actual_start_date")
-    private LocalDateTime actualStartDate;
+    @Column(name = "actual_start_date" ,columnDefinition = "TIMESTAMP")
+    private LocalDateTime  actualStartDate;
 
-    @Column(name = "actual_end_date")
+    @Column(name = "actual_end_date",columnDefinition = "TIMESTAMP")
     private LocalDateTime actualEndDate;
-
+    @Column(name = "planned_start_date",columnDefinition = "TIMESTAMP")
+    private LocalDateTime   plannedStartDate;
+    @Column(name = "planned_end_date",columnDefinition = "TIMESTAMP")
+    private LocalDateTime  plannedEndDate;
 
     @JoinColumn(name = "category_id")
-    private Long categoryId;
+    private int categoryId;
 
 
     @JoinColumn(name = "status_id")
-    private Long statusId;
+    private int statusId;
 
 }
