@@ -19,7 +19,7 @@ public enum RoleEnum {
         return bit;
     }
 
-    public static List<RoleEnum> fromMask(Long mask) {
+    public static List<RoleEnum> fromMask(int mask) {
         List<RoleEnum> roles = new ArrayList<>();
         for (RoleEnum role : RoleEnum.values()) {
             if ((mask & role.getBit()) != 0) {

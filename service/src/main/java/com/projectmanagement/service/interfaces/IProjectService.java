@@ -10,4 +10,6 @@ public interface IProjectService {
     public GenericApiResponse<String,String> addProject(AddProjectRequestDto addProjectDto);
 
     public GenericApiResponse<String,String> updateProject(UpdateProjectRequestDto updateProjectRequestDto);
+
+    public GenericApiResponse<String,String> deleteProject(long id);
 }

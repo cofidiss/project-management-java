@@ -12,7 +12,7 @@ public class TaskEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     private String name;
 
@@ -35,7 +35,7 @@ public class TaskEntity {
     // Relations
 
     @JoinColumn(name = "project_id")
-    private Long projectId;
+    private long projectId;
 
 
     @JoinColumn(name = "parent_task_id")
@@ -43,9 +43,12 @@ public class TaskEntity {
 
 
     @JoinColumn(name = "category_id")
-    private Long categoryId;
+    private int categoryId;
 
+
+    @JoinColumn(name = "priority")
+    private int priority;
 
     @JoinColumn(name = "status_id")
-    private Long statusId;
+    private int statusId;
 }

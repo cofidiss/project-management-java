@@ -6,10 +6,7 @@ import com.projectmanagement.service.interfaces.IProjectService;
 import com.projectmanagement.service.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/project")
@@ -45,8 +42,15 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
-    @PostMapping("/deleteProject")
-    public ResponseEntity<?> deleteProject(@RequestBody long id){
-return ResponseEntity.ok("");
+    @DeleteMapping("/deleteProject")
+    public ResponseEntity<?> deleteProject(long id){
+        var  result = projectService.deleteProject(id);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
     }
 }

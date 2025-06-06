@@ -9,8 +9,6 @@ public class UpdateProjectRequestDto {
     private String name;
     private LocalDateTime plannedStartDate;
     private LocalDateTime plannedEndDate;
-    private LocalDateTime actualStartDate;
-    private LocalDateTime actualEndDate;
     private int categoryId;
     private int statusId;
 }

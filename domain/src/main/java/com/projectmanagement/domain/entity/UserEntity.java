@@ -18,5 +18,5 @@ public class UserEntity {
     @Column(nullable = false,name = "password")
     private String password;
     @Column(nullable = false,name = "role_id")
-    private long roleId;
+    private int roleId;
 }

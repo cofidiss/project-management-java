@@ -11,9 +11,9 @@ public class AddTaskRequestDto {
     private String name;
     private Long projectId;
     private Long parentTaskId;
-    private Long categoryId;
+    private int categoryId;
+    private int priority;
     private Double totalRequiredManHour;
-    private Integer statusId;
     private LocalDateTime plannedStartDate;
     private LocalDateTime plannedEndDate;
 
