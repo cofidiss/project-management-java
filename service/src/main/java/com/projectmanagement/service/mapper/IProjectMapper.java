@@ -2,15 +2,21 @@ package com.projectmanagement.service.mapper;
 
 import com.projectmanagement.domain.entity.ProjectEntity;
 
+import com.projectmanagement.domain.enums.ProjectCategoryEnum;
 import com.projectmanagement.domain.enums.ProjectStatusEnum;
 
+import com.projectmanagement.domain.model.FilterProjectModel;
 import com.projectmanagement.service.DTO.AddProjectRequestDto;
+import com.projectmanagement.service.DTO.FilterProjectDto;
+import com.projectmanagement.service.DTO.ProjectInfoDto;
 import com.projectmanagement.service.DTO.UpdateProjectRequestDto;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface IProjectMapper {
@@ -19,7 +25,9 @@ public interface IProjectMapper {
     @Mapping(target = "plannedEndDate", source = "plannedEndDate")
     @Mapping(target = "categoryId", source = "categoryId")
     @Mapping(target = "statusId",expression = "java(com.projectmanagement.domain.enums.ProjectStatusEnum.New.ordinal())")
+    @Mapping(target = "description", source = "description")
     ProjectEntity toProjectEntity(AddProjectRequestDto addProjectRequestDto);
+
 
 
     @Mapping(target = "id", source = "updateProjectRequestDto.id")
@@ -30,6 +38,7 @@ public interface IProjectMapper {
     @Mapping(target = "actualEndDate",expression = "java(resolveActualEndDate(updateProjectRequestDto, projectEntityInDb))")
     @Mapping(target = "categoryId", source = "updateProjectRequestDto.categoryId")
     @Mapping(target = "statusId", source = "updateProjectRequestDto.statusId")
+    @Mapping(target = "description", source = "updateProjectRequestDto.description")
     ProjectEntity toProjectEntity(UpdateProjectRequestDto updateProjectRequestDto, ProjectEntity projectEntityInDb);
     default LocalDateTime resolveActualStartDate(UpdateProjectRequestDto updateProjectRequestDto, ProjectEntity projectEntity) {
         if (updateProjectRequestDto.getStatusId() != ProjectStatusEnum.New.ordinal() && projectEntity.getStatusId() == ProjectStatusEnum.New.ordinal() ) {
@@ -45,5 +54,23 @@ public interface IProjectMapper {
         }
         return projectEntity.getActualEndDate();
     }
+
+
+    @Mapping(target = "status", expression = "java(mapStatus(projectEntity.getStatusId()))")
+    @Mapping(target = "category", expression = "java(mapCategory(projectEntity.getCategoryId()))")
+    ProjectInfoDto toProjectInfoDto(ProjectEntity projectEntity);
+    List<ProjectInfoDto> toProjectInfoDtoList(List<ProjectEntity> projectEntity);
+
+
+    FilterProjectModel toFilterProjectModel(FilterProjectDto filterProjectDto);
+
+    default String mapStatus(int statusId) {
+        return ProjectStatusEnum.values()[statusId].name();
+    }
+
+    default String mapCategory(int categoryId) {
+        return ProjectCategoryEnum.values()[categoryId].name();
+    }
+
 }
 

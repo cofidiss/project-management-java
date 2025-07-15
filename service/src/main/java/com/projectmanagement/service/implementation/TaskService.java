@@ -2,8 +2,10 @@ package com.projectmanagement.service.implementation;
 
 import com.projectmanagement.domain.entity.TaskEntity;
 import com.projectmanagement.domain.model.GenericApiResponse;
-import com.projectmanagement.repository.interfaces.IProjectRepository;
+
 import com.projectmanagement.repository.interfaces.ITaskRepository;
+import com.projectmanagement.repository.interfaces.ProjectRepository;
+import com.projectmanagement.repository.interfaces.ProjectRepositoryCustom;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
 import com.projectmanagement.service.DTO.UpdateTaskRequestDto;
 import com.projectmanagement.service.interfaces.ITaskService;
@@ -16,10 +18,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class TaskService implements ITaskService {
-    private IProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
     private ITaskRepository taskRepository;
     private ITaskMapper taskMapper;
-    public TaskService(ITaskRepository taskRepository,IProjectRepository projectRepository,ITaskMapper taskMapper){
+    public TaskService(ITaskRepository taskRepository,ProjectRepository projectRepository,ITaskMapper taskMapper){
         this.taskMapper = taskMapper;
         this.taskRepository  = taskRepository;
         this.projectRepository = projectRepository;

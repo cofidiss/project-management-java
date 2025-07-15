@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-25T19:35:36+0300",
+    date = "2025-07-15T17:49:35+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (JetBrains s.r.o.)"
 )
 @Component
@@ -25,7 +25,7 @@ public class IUserMapperImpl implements IUserMapper {
         userEntity.setUsername( dto.getUsername() );
         userEntity.setPassword( CustomUtil.hashPassword( dto.getPassword() ) );
         if ( dto.getRoleId() != null ) {
-            userEntity.setRoleId( dto.getRoleId() );
+            userEntity.setRoleId( dto.getRoleId().intValue() );
         }
 
         return userEntity;

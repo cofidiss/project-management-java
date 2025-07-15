@@ -29,7 +29,8 @@ public class ProjectEntity {
 
     @JoinColumn(name = "category_id")
     private int categoryId;
-
+    @JoinColumn(name = "description")
+    private String description;
 
     @JoinColumn(name = "status_id")
     private int statusId;
