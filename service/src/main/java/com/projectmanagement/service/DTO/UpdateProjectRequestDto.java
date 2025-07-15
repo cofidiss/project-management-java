@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 public class UpdateProjectRequestDto {
     private long id ;
     private String name;
+    private String description;
     private LocalDateTime plannedStartDate;
     private LocalDateTime plannedEndDate;
     private int categoryId;
