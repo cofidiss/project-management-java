@@ -150,4 +150,18 @@ var taskEntityToInsert = taskMapper.toTaskEntity(addTaskRequestDto);
         genericApiResponse.setSuccessData(taskInfoDto);
         return genericApiResponse;
     }
+
+    @Override
+    public GenericApiResponse<String, List<TaskInfoDto>> getChildTasks(Long taskId) {
+
+
+        GenericApiResponse<String, List<TaskInfoDto>> genericApiResponse = new GenericApiResponse<>();
+        var taskEntityList = taskRepository.findByParentTaskId(taskId);
+
+        var taskInfoDtoList=   taskMapper.toTaskInfoDtoList(taskEntityList);
+
+
+        genericApiResponse.setSuccessData(taskInfoDtoList);
+        return genericApiResponse;
+    }
 }

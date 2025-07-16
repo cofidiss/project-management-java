@@ -94,5 +94,16 @@ public class TaskController {
         return response.body(result.getErrorData());
     }
 
+    @GetMapping("/getChildTasks")
+    public ResponseEntity<?> getChildTasks(Long parentTaskId  ){
+        var  result = taskService.getChildTasks(parentTaskId);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
 
 }

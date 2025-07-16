@@ -17,4 +17,6 @@ public interface ITaskService {
     public GenericApiResponse<String, List<TaskInfoDto>> getTasksByProjectId(Long projectId);
 
     public GenericApiResponse<String, TaskInfoDto>  getTask(Long taskId);
+
+    public GenericApiResponse<String, List<TaskInfoDto>> getChildTasks(Long taskId);
 }
