@@ -5,16 +5,16 @@ import com.projectmanagement.domain.model.GenericApiResponse;
 
 import com.projectmanagement.repository.interfaces.ITaskRepository;
 import com.projectmanagement.repository.interfaces.ProjectRepository;
-import com.projectmanagement.repository.interfaces.ProjectRepositoryCustom;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
+import com.projectmanagement.service.DTO.ProjectInfoDto;
+import com.projectmanagement.service.DTO.TaskInfoDto;
 import com.projectmanagement.service.DTO.UpdateTaskRequestDto;
 import com.projectmanagement.service.interfaces.ITaskService;
-import com.projectmanagement.service.mapper.IProjectMapper;
 import com.projectmanagement.service.mapper.ITaskMapper;
 import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Example;
-import org.springframework.data.repository.query.FluentQuery;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class TaskService implements ITaskService {
@@ -118,5 +118,36 @@ var taskEntityToInsert = taskMapper.toTaskEntity(addTaskRequestDto);
         return;
 
     childTasksToDelete.forEach(this::RecursiveTaskDelete);
+    }
+
+
+
+
+    @Override
+    public GenericApiResponse<String, List<TaskInfoDto>> getTasksByProjectId(Long projectId) {
+
+        GenericApiResponse<String, List<TaskInfoDto>> genericApiResponse = new GenericApiResponse<>();
+        var taskEntityList = taskRepository.findByProjectIdOrderByIdAsc(projectId);
+
+        var taskInfoDtoList=   taskMapper.toTaskInfoDtoList(taskEntityList);
+        for (var taskInfoDto : taskInfoDtoList){
+         var hashChildTask =    !taskRepository.findByParentTaskId(taskInfoDto.getId()).isEmpty();
+            taskInfoDto.setHasChildTasks(hashChildTask);
+        }
+
+        genericApiResponse.setSuccessData(taskInfoDtoList);
+        return genericApiResponse;
+    }
+
+    @Override
+    public GenericApiResponse<String, TaskInfoDto> getTask(Long taskId) {
+
+        GenericApiResponse<String, TaskInfoDto> genericApiResponse = new GenericApiResponse<>();
+        var taskEntity = taskRepository.getById(taskId);
+
+        var taskInfoDto =   taskMapper.toTaskInfoDto(taskEntity);
+
+        genericApiResponse.setSuccessData(taskInfoDto);
+        return genericApiResponse;
     }
 }

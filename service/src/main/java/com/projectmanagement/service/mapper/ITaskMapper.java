@@ -1,21 +1,28 @@
 package com.projectmanagement.service.mapper;
 
-import com.projectmanagement.domain.entity.ProjectEntity;
 import com.projectmanagement.domain.entity.TaskEntity;
+
 import com.projectmanagement.domain.enums.TaskStatusEnum;
-import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
-import com.projectmanagement.service.DTO.UpdateProjectRequestDto;
+import com.projectmanagement.service.DTO.TaskInfoDto;
 import com.projectmanagement.service.DTO.UpdateTaskRequestDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ITaskMapper {
 
 
+
+    @Mapping(target = "status", expression = "java(mapStatus(taskEntity.getStatusId()))")
+
+    TaskInfoDto toTaskInfoDto(TaskEntity taskEntity);
+
+
+    List<TaskInfoDto> toTaskInfoDtoList(List<TaskEntity> taskEntity);
 
     @Mapping(target = "name", source = "name")
     @Mapping(target = "plannedStartDate", source = "plannedStartDate")
@@ -60,4 +67,9 @@ public interface ITaskMapper {
         }
         return taskEntityInDb.getActualEndDate();
     }
-}
+
+
+    default String mapStatus(int statusId) {
+        return TaskStatusEnum.values()[statusId].name();
+
+    }    }

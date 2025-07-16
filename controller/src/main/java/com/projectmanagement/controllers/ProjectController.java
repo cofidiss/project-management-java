@@ -32,6 +32,19 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
+
+    @GetMapping("/detail")
+    public ResponseEntity<?> getProjectDetail( long projectId){
+
+        var  result = projectService.getProject(projectId);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
     @PostMapping("/")
     public ResponseEntity<?> addProject(@RequestBody AddProjectRequestDto AddProjectRequestDto){
 

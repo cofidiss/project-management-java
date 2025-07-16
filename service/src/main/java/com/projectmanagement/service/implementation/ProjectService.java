@@ -126,4 +126,12 @@ var projectInfoDtoList=   projectMapper.toProjectInfoDtoList(projectEntities);
         return genericApiResponse;
     }
 
+    @Override
+    public GenericApiResponse<String, List<ProjectDetailDto>> getProjectDetail(long projectId) {
+  return null;
+
+
+    }
+
+
 }

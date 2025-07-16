@@ -1,8 +1,11 @@
 package com.projectmanagement.controllers;
 
+import com.projectmanagement.domain.enums.ProjectStatusEnum;
+import com.projectmanagement.domain.enums.TaskStatusEnum;
 import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
 import com.projectmanagement.service.DTO.UpdateTaskRequestDto;
+import com.projectmanagement.service.interfaces.IProjectService;
 import com.projectmanagement.service.interfaces.ITaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,12 +16,26 @@ public class TaskController {
 
 
     private final ITaskService taskService;
+    private final IProjectService projectService;
 
-    public TaskController(ITaskService taskService) {
+    public TaskController(ITaskService taskService, IProjectService projectService) {
 
         this.taskService = taskService;
+        this.projectService = projectService;
     }
-    @PostMapping("/addTask")
+    @GetMapping("/")
+    public ResponseEntity<?> getTask( Long taskId){
+
+        var  result = taskService.getTask(taskId);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
+    @PostMapping("/")
     public ResponseEntity<?> addTask(@RequestBody AddTaskRequestDto addTaskRequestDto){
 
         var  result = taskService.addTask(addTaskRequestDto);
@@ -30,7 +47,7 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
-    @PostMapping("/updateTask")
+    @PutMapping("/")
     public ResponseEntity<?> updateTask(@RequestBody UpdateTaskRequestDto updateTaskRequestDto){
 
         var  result = taskService.updateTask(updateTaskRequestDto);
@@ -42,7 +59,7 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
-    @DeleteMapping("/deleteTask")
+    @DeleteMapping("/")
     public ResponseEntity<?> deleteTask( Long id){
 
         var  result = taskService.deleteTask(id);
@@ -54,4 +71,28 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
+    @GetMapping("/getStatusLov")
+    public ResponseEntity<?> getStatusLov( ){
+        var  result = projectService.getLovDto(TaskStatusEnum.class);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
+    @GetMapping("/getTasksByProjectId")
+    public ResponseEntity<?> getTasksByProjectId(Long projectId  ){
+        var  result = taskService.getTasksByProjectId(projectId);
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
+
+
 }

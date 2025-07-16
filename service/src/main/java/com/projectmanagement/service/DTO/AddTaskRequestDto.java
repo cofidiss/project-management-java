@@ -13,7 +13,7 @@ public class AddTaskRequestDto {
     private Long parentTaskId;
     private int categoryId;
     private int priority;
-    private Double totalRequiredManHour;
+    private double totalRequiredManHour;
     private LocalDateTime plannedStartDate;
     private LocalDateTime plannedEndDate;
 

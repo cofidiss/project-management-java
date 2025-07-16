@@ -21,4 +21,8 @@ public interface IProjectService {
 
 
     public GenericApiResponse<String,List<ProjectInfoDto>> FilterProject(FilterProjectDto filterProjectDto);
+
+    public GenericApiResponse<String,List<ProjectDetailDto>> getProjectDetail(long projectId);
+
+
 }
