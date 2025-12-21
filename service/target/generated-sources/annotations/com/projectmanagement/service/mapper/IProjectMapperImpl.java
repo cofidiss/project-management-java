@@ -2,8 +2,10 @@ package com.projectmanagement.service.mapper;
 
 import com.projectmanagement.domain.entity.ProjectEntity;
 import com.projectmanagement.domain.model.FilterProjectModel;
+import com.projectmanagement.domain.model.LovModel;
 import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.FilterProjectDto;
+import com.projectmanagement.service.DTO.LovDto;
 import com.projectmanagement.service.DTO.ProjectInfoDto;
 import com.projectmanagement.service.DTO.UpdateProjectRequestDto;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-07-16T16:08:19+0300",
+    date = "2025-12-21T16:45:43+0300",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.12 (JetBrains s.r.o.)"
 )
 @Component
@@ -59,6 +61,20 @@ public class IProjectMapperImpl implements IProjectMapper {
         projectEntity.setActualEndDate( resolveActualEndDate(updateProjectRequestDto, projectEntityInDb) );
 
         return projectEntity;
+    }
+
+    @Override
+    public List<LovDto> toProjectLovDtoList(List<LovModel> lovModellist) {
+        if ( lovModellist == null ) {
+            return null;
+        }
+
+        List<LovDto> list = new ArrayList<LovDto>( lovModellist.size() );
+        for ( LovModel lovModel : lovModellist ) {
+            list.add( lovModelToLovDto( lovModel ) );
+        }
+
+        return list;
     }
 
     @Override
@@ -118,5 +134,18 @@ public class IProjectMapperImpl implements IProjectMapper {
         filterProjectModel.setCategoryId( filterProjectDto.getCategoryId() );
 
         return filterProjectModel;
+    }
+
+    protected LovDto lovModelToLovDto(LovModel lovModel) {
+        if ( lovModel == null ) {
+            return null;
+        }
+
+        LovDto lovDto = new LovDto();
+
+        lovDto.setId( lovModel.getId() );
+        lovDto.setName( lovModel.getName() );
+
+        return lovDto;
     }
 }

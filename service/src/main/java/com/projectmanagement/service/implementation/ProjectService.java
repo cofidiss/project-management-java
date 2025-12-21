@@ -35,7 +35,7 @@ this.taskRepository = taskRepository;
             var entityToAdd =     projectMapper.toProjectEntity(addProjectDto);
 
             projectRepository.save(entityToAdd);
-            genericApiResponse.setSuccessData(entityToAdd.getId().toString());
+            genericApiResponse.setSuccessData(String.valueOf(entityToAdd.getId()));
         }
 catch (Exception e){
     genericApiResponse.setStatusCode(400);
@@ -133,5 +133,15 @@ var projectInfoDtoList=   projectMapper.toProjectInfoDtoList(projectEntities);
 
     }
 
+    @Override
+    public GenericApiResponse<String, List<LovDto>> getProjectLov() {
+        GenericApiResponse<String, List<LovDto>> genericApiResponse = new GenericApiResponse<>();
+        var projectLovModel = projectRepository.getProjectLovModel();
+        var projectLovDtoList=   projectMapper.toProjectLovDtoList(projectLovModel);
+        genericApiResponse.setSuccessData(projectLovDtoList);
+        return genericApiResponse;
+    }
+    }
 
-}
+
+

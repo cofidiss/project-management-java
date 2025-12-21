@@ -115,4 +115,16 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
+
+    @GetMapping("/getProjectLov")
+    public ResponseEntity<?> getProjectLov( ){
+        var  result = projectService.getProjectLov();
+        var response =   ResponseEntity.status( result.getStatusCode());
+        if (result.isSuccess()) {
+
+            return response.body(result.getSuccessData());
+        }
+
+        return response.body(result.getErrorData());
+    }
 }

@@ -6,10 +6,8 @@ import com.projectmanagement.domain.enums.ProjectCategoryEnum;
 import com.projectmanagement.domain.enums.ProjectStatusEnum;
 
 import com.projectmanagement.domain.model.FilterProjectModel;
-import com.projectmanagement.service.DTO.AddProjectRequestDto;
-import com.projectmanagement.service.DTO.FilterProjectDto;
-import com.projectmanagement.service.DTO.ProjectInfoDto;
-import com.projectmanagement.service.DTO.UpdateProjectRequestDto;
+import com.projectmanagement.domain.model.LovModel;
+import com.projectmanagement.service.DTO.*;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -19,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
-public interface IProjectMapper {
+public interface IProjectMapper extends IBaseMapper {
     @Mapping(target = "name", source = "name")
     @Mapping(target = "plannedStartDate", source = "plannedStartDate")
     @Mapping(target = "plannedEndDate", source = "plannedEndDate")
@@ -55,6 +53,7 @@ public interface IProjectMapper {
         return projectEntity.getActualEndDate();
     }
 
+    List<LovDto> toProjectLovDtoList(List<LovModel> lovModellist);
 
     @Mapping(target = "status", expression = "java(mapStatus(projectEntity.getStatusId()))")
     @Mapping(target = "category", expression = "java(mapCategory(projectEntity.getCategoryId()))")

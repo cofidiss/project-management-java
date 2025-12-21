@@ -8,6 +8,7 @@ public class GenericApiResponse<TError, TSuccess> {
     // Constructor
     public GenericApiResponse() {
         this.statusCode = 200;
+
     }
 
     // Getter for Success

@@ -25,4 +25,5 @@ public interface IProjectService {
     public GenericApiResponse<String,List<ProjectDetailDto>> getProjectDetail(long projectId);
 
 
+    public GenericApiResponse<String,List<LovDto>> getProjectLov();
 }

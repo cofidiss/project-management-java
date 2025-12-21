@@ -56,7 +56,7 @@ private  JwtUtil jwtUtil;
         Optional<UserEntity> userOpt = userRepository.findByUsername(signUpRequest.getUsername());
 
         if(userOpt.isPresent()){
-            apiResponse.setSuccessData(userOpt.get().getId().toString());
+            apiResponse.setSuccessData(String.valueOf( userOpt.get().getId()));
         }
         return apiResponse;
     }
