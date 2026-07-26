@@ -1,60 +1,57 @@
-Project Workflow
-1. User Authentication
+## Project Workflow
+
+### 1. User Authentication
 
 Users can register and log in through the React application.
 
-Passwords are securely hashed using BCrypt before being stored in PostgreSQL.
+Passwords are securely hashed using **BCrypt** before being stored in **PostgreSQL**.
 
-After successful authentication, the server issues a JWT stored in an HTTP-Only Cookie.
+After successful authentication, the server issues a **JWT** stored in an **HTTP-Only Cookie**.
 
-Protected endpoints require authentication and enforce role-based authorization (e.g., READY and MODIFY).
+Protected endpoints require authentication and enforce role-based authorization (**READY** and **MODIFY**).
 
-2. Project Management
+### 2. Project Management
 
-Users with the MODIFY permission can create, update, and delete projects.
+Users with the **MODIFY** permission can create, update, and delete projects.
 
-Projects can be filtered by various criteria such as project name, category, status, planned dates, and actual dates.
+Projects can be filtered by **project name**, **status**, **category**, **planned dates**, and **actual dates**.
 
-Users with the READY permission have read-only access and can only view project information.
+Users with the **READY** permission have **read-only** access.
 
-3. Task Management
+### 3. Task Management
 
-Each project contains multiple tasks, and tasks can also include nested subtasks.
+Each project contains multiple **tasks**, and every task can include **subtasks**.
 
-Users with the MODIFY permission can create, update, and delete tasks and subtasks.
+Users with the **MODIFY** permission can create, update, and delete tasks and subtasks.
 
-Tasks can be filtered by properties such as name, status, priority, assigned user, and dates.
+Tasks can be filtered by **name**, **status**, **priority**, **assigned user**, and **dates**.
 
-4. Automatic Project Status Management
+### 4. Automatic Project Status Management
 
-The project status is automatically updated based on the status of its tasks.
+The project status is automatically synchronized with its tasks.
 
-When the first task changes from New to In Progress, the project automatically starts.
-The project's Actual Start Date is set automatically when work begins.
-When all tasks are marked as Completed, the project is automatically completed.
-The project's Actual End Date is set automatically after the final task is completed.
+- When the first task changes to **In Progress**, the project status automatically becomes **In Progress**.
+- The project's **Actual Start Date** is filled automatically.
+- When **all tasks** are marked as **Completed**, the project status automatically becomes **Completed**.
+- The project's **Actual End Date** is filled automatically.
 
-This ensures that the project lifecycle always reflects the progress of its tasks without requiring manual updates.
+### 5. Advanced Filtering
 
-5. Advanced Filtering
+Projects and tasks support dynamic filtering using **Jpa and Criteria**, allowing efficient and flexible database queries.
 
-Projects and tasks support dynamic filtering and searching.
+### 6. Role-Based Authorization
 
-Filtering is implemented using CriteriaBuilder and Jpa, providing efficient and flexible database queries based on multiple optional criteria.
+- **READY** users can only view projects and tasks.
+- **MODIFY** users can create, update, and delete projects, tasks, and subtasks.
 
-6. Role-Based Authorization
+### 7. Docker Deployment
 
-The application uses permission-based authorization.
+The application and its required services are containerized using **Docker**.
 
-READY users can only view projects and tasks.
-MODIFY users can create, update, and delete projects, tasks, and subtasks.
-
-Authorization is enforced on protected endpoints to ensure secure access control.
-
-7. Docker Deployment
-
-The application and its required services are containerized using Docker.
-
-The complete application environment can be started using Docker Compose, allowing the backend, PostgreSQL, and other required services to run together in a consistent environment.
+The complete environment can be started with **Docker Compose**.
 
 To stop the application:
+
+```bash
+docker compose down
+```
