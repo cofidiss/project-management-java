@@ -1,3 +1,8 @@
+<img width="5957" height="902" alt="mermaid-diagram (1)" src="https://github.com/user-attachments/assets/3d53afca-7631-44af-9b97-9f79ba6cd2c1" />
+
+
+https://github.com/user-attachments/assets/c7915cbf-9889-45b1-b74f-23498e885213
+
 ## Project Workflow
 
 ### 1. User Authentication
