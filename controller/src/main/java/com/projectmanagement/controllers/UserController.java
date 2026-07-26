@@ -52,7 +52,7 @@ public class UserController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE,result.getSuccessData().toString())
-                    .body(result.getSuccessData());
+                    .build();
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
