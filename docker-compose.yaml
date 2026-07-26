@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  project-management-app:
+    image: project-management-spring:latest
+    build:
+      context: .
+      dockerfile: dockerfile
+    container_name: project-management-spring
+    depends_on:
+      - postgres    
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    ports:
+      - "5173:5173"
+
+  postgres:
+    image: postgres:17
+    container_name: project-management-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ZAQ12wsx
+      POSTGRES_DB: project_management
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/init:/docker-entrypoint-initdb.d:ro
+
