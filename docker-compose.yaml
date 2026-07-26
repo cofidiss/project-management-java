@@ -12,7 +12,7 @@ services:
     environment:
       SPRING_PROFILES_ACTIVE: docker
     ports:
-      - "5173:5173"
+      - "3000:3000"
 
   postgres:
     image: postgres:17
