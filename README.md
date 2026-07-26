@@ -40,7 +40,7 @@ This ensures that the project lifecycle always reflects the progress of its task
 
 Projects and tasks support dynamic filtering and searching.
 
-Filtering is implemented using QueryDSL, providing efficient and flexible database queries based on multiple optional criteria.
+Filtering is implemented using CriteriaBuilder and Jpa, providing efficient and flexible database queries based on multiple optional criteria.
 
 6. Role-Based Authorization
 
