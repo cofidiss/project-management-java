@@ -1,6 +1,8 @@
 package com.projectmanagement.controllers;
 
+import com.projectmanagement.controller.annotaiton.RequirePermission;
 import com.projectmanagement.domain.enums.ProjectStatusEnum;
+import com.projectmanagement.domain.enums.RoleEnum;
 import com.projectmanagement.domain.enums.TaskStatusEnum;
 import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
@@ -35,6 +37,7 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @PostMapping("/")
     public ResponseEntity<?> addTask(@RequestBody AddTaskRequestDto addTaskRequestDto){
 
@@ -47,6 +50,7 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @PutMapping("/")
     public ResponseEntity<?> updateTask(@RequestBody UpdateTaskRequestDto updateTaskRequestDto){
 
@@ -59,6 +63,7 @@ public class TaskController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @DeleteMapping("/")
     public ResponseEntity<?> deleteTask( Long id){
 

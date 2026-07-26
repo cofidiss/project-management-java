@@ -46,10 +46,10 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ❌ CORS devre dışı
                 .csrf(csrf -> csrf.disable()) // ❌ CSRF devre dışı
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/user/login", "/api/user/signup", "/swagger-ui/index.html", "/swagger-ui/**", "/api-docs/**").permitAll()
-                        .anyRequest().permitAll()
+                        .requestMatchers("/api/user/login", "/api/user/signup","/api/user/isLoggedIn","/swagger-ui/index.html", "/swagger-ui/**", "/api-docs/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+                .addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

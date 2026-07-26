@@ -1,7 +1,9 @@
 package com.projectmanagement.controllers;
 
+import com.projectmanagement.controller.annotaiton.RequirePermission;
 import com.projectmanagement.domain.enums.ProjectCategoryEnum;
 import com.projectmanagement.domain.enums.ProjectStatusEnum;
+import com.projectmanagement.domain.enums.RoleEnum;
 import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.FilterProjectDto;
 import com.projectmanagement.service.DTO.UpdateProjectRequestDto;
@@ -45,6 +47,7 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @PostMapping("/")
     public ResponseEntity<?> addProject(@RequestBody AddProjectRequestDto AddProjectRequestDto){
 
@@ -57,6 +60,7 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @PutMapping("/")
     public ResponseEntity<?> updateProject(@RequestBody UpdateProjectRequestDto updateProjectRequestDto){
 
@@ -69,6 +73,7 @@ public class ProjectController {
 
         return response.body(result.getErrorData());
     }
+    @RequirePermission(RoleEnum.MODIFY)
     @DeleteMapping("/")
     public ResponseEntity<?> deleteProject(long id){
         var  result = projectService.deleteProject(id);

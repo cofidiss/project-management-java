@@ -1,6 +1,8 @@
 package com.projectmanagement.service.implementation;
 
 import com.projectmanagement.domain.entity.TaskEntity;
+import com.projectmanagement.domain.enums.ProjectStatusEnum;
+import com.projectmanagement.domain.enums.TaskStatusEnum;
 import com.projectmanagement.domain.model.GenericApiResponse;
 
 import com.projectmanagement.repository.interfaces.ITaskRepository;
@@ -14,6 +16,7 @@ import com.projectmanagement.service.mapper.ITaskMapper;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -87,10 +90,44 @@ var taskEntityToInsert = taskMapper.toTaskEntity(addTaskRequestDto);
 
         var taskEntityToUpdate = taskMapper.toTaskEntity(updateTaskRequestDto,taskEntityInDb);
 
-        taskRepository.save(taskEntityToUpdate);
 
 
+        syncProjectStatusAfterTaskUpdate(taskEntityInDb, taskEntityToUpdate);
+
+    taskRepository.save(taskEntityToUpdate);
         return genericApiResponse;
+    }
+
+    private void syncProjectStatusAfterTaskUpdate(TaskEntity previousTask, TaskEntity updatedTask) {
+        projectRepository.findById(updatedTask.getProjectId()).ifPresent(projectEntity -> {
+            boolean shouldSaveProject = false;
+
+            if (previousTask.getStatusId() != TaskStatusEnum.InProgress.ordinal()
+                    && updatedTask.getStatusId() == TaskStatusEnum.InProgress.ordinal()) {
+                if (projectEntity.getActualStartDate() == null) {
+                    projectEntity.setActualStartDate(LocalDateTime.now());
+                }
+                projectEntity.setStatusId(ProjectStatusEnum.InProgress.ordinal());
+                shouldSaveProject = true;
+            }
+
+            if (previousTask.getStatusId() != TaskStatusEnum.Completed.ordinal()
+                    && updatedTask.getStatusId() == TaskStatusEnum.Completed.ordinal()) {
+                boolean allTasksCompleted = taskRepository.findByProjectId(updatedTask.getProjectId())
+                        .stream()
+                        .allMatch(task -> task.getStatusId() == TaskStatusEnum.Completed.ordinal() || task.getId() == updatedTask.getId());
+
+                if (allTasksCompleted) {
+                    projectEntity.setStatusId(ProjectStatusEnum.Completed.ordinal());
+                    projectEntity.setActualEndDate(LocalDateTime.now());
+                    shouldSaveProject = true;
+                }
+            }
+
+            if (shouldSaveProject) {
+                projectRepository.save(projectEntity);
+            }
+        });
     }
 
 @Transactional
