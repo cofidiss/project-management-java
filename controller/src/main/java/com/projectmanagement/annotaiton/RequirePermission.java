@@ -1,4 +1,4 @@
-package com.projectmanagement.controller.annotaiton;
+package com.projectmanagement.annotaiton;
 
 
 

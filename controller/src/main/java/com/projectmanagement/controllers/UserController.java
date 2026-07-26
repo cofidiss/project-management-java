@@ -1,7 +1,7 @@
 package com.projectmanagement.controllers;
 
 import com.projectmanagement.domain.enums.RoleEnum;
-import com.projectmanagement.controller.annotaiton.RequirePermission;
+import com.projectmanagement.annotaiton.RequirePermission;
 import com.projectmanagement.service.DTO.LoginRequestDto;
 import com.projectmanagement.service.DTO.SignUpRequestDto;
 import com.projectmanagement.service.implementation.JwtUtil;

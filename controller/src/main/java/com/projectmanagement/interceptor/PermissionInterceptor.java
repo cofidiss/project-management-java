@@ -1,7 +1,7 @@
-package com.projectmanagement.controller.interceptor;
+package com.projectmanagement.interceptor;
 
 import com.projectmanagement.domain.enums.RoleEnum;
-import com.projectmanagement.controller.annotaiton.RequirePermission;
+import com.projectmanagement.annotaiton.RequirePermission;
 import com.projectmanagement.service.interfaces.IUserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

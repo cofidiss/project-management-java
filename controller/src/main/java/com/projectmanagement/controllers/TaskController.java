@@ -1,10 +1,8 @@
 package com.projectmanagement.controllers;
 
-import com.projectmanagement.controller.annotaiton.RequirePermission;
-import com.projectmanagement.domain.enums.ProjectStatusEnum;
+import com.projectmanagement.annotaiton.RequirePermission;
 import com.projectmanagement.domain.enums.RoleEnum;
 import com.projectmanagement.domain.enums.TaskStatusEnum;
-import com.projectmanagement.service.DTO.AddProjectRequestDto;
 import com.projectmanagement.service.DTO.AddTaskRequestDto;
 import com.projectmanagement.service.DTO.UpdateTaskRequestDto;
 import com.projectmanagement.service.interfaces.IProjectService;

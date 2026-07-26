@@ -1,6 +1,6 @@
-package com.projectmanagement.controller.config;
+package com.projectmanagement.config;
 
-import com.projectmanagement.controller.filter.JwtFilter;
+import com.projectmanagement.filter.JwtFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
