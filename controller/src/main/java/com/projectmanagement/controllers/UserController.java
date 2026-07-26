@@ -49,7 +49,6 @@ public class UserController {
     public ResponseEntity<?> login(@RequestBody LoginRequestDto loginRequestDto, HttpServletResponse response) {
         var result = userService.login(loginRequestDto.getUsername(), loginRequestDto.getPassword());
         if (result.isSuccess()) {
-
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE,result.getSuccessData().toString())
                     .build();
