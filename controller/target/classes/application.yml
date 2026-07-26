@@ -21,6 +21,6 @@ springdoc:
 security:
   jwt:
     secret: 1234567890
-    expirationTime: 30000
+    expirationTime: 3000000
 server:
-  port: 8080
+  port: 3000

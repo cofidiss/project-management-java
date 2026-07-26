@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum RoleEnum {
-    READ(1 << 0),    // 0001 → 1
-    ADD(1 << 1),     // 0010 → 2
-    UPDATE(1 << 2),  // 0100 → 4
-    DELETE(1 << 3);  // 1000 → 8
+    READ(1),    // 0001 → 1
+    MODIFY(2);  // 0010 → 2
+
 
     private final int bit;
 

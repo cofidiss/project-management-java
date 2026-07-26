@@ -58,9 +58,8 @@ public  class ProjectRepositoryImpl implements ProjectRepositoryCustom {
         }
 
         cq.where(predicates.toArray(new Predicate[0]));
-        cq.orderBy(cb.asc(root.get("id"))); // cb = CriteriaBuilder
-        // Order varsa eklenebilir, örn:
-        // cq.orderBy(cb.asc(root.get("name")));
+        cq.orderBy(cb.desc(root.get("id"))); // cb = CriteriaBuilder
+
 
         // Sayfalama için sorgu
         TypedQuery<ProjectEntity> query = entityManager.createQuery(cq);

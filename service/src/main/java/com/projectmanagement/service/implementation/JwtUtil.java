@@ -5,14 +5,16 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Component;
 
+import java.time.Duration;
 import java.util.Date;
 import java.util.Objects;
 
 @Component
 public class JwtUtil {
-   private  JwtConfig jwtConfig;
+    JwtConfig jwtConfig;
 public JwtUtil(JwtConfig jwtConfig){
 this.jwtConfig = jwtConfig;
 }
@@ -44,4 +46,24 @@ this.jwtConfig = jwtConfig;
     public boolean isTokenExpired(String token) {
         return extractAllClaims(token).getExpiration().before(new Date());
     }
+    public ResponseCookie createCookie(long userId) {
+        String token = generateToken(userId);
+
+        return ResponseCookie.from(UserService.COOKIE_NAME, token)
+                .httpOnly(true)
+                .path("/")
+                .maxAge(Duration.ofMillis(jwtConfig.getExpirationTime()))
+                .sameSite("Lax")
+                .build();
+    }
+
+    public ResponseCookie deleteCookie() {
+        return ResponseCookie.from(UserService.COOKIE_NAME, "")
+                .httpOnly(true)
+                .path("/")
+                .maxAge(Duration.ZERO)
+                .sameSite("Lax")
+                .build();
+    }
+    
 }
