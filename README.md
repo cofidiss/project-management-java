@@ -24,8 +24,6 @@ Each project contains multiple **tasks**, and every task can include **subtasks*
 
 Users with the **MODIFY** permission can create, update, and delete tasks and subtasks.
 
-Tasks can be filtered by **name**, **status**, **priority**, **assigned user**, and **dates**.
-
 ### 4. Automatic Project Status Management
 
 The project status is automatically synchronized with its tasks.
@@ -37,7 +35,7 @@ The project status is automatically synchronized with its tasks.
 
 ### 5. Advanced Filtering
 
-Projects and tasks support dynamic filtering using **Jpa and Criteria**, allowing efficient and flexible database queries.
+Projects support dynamic filtering using **Jpa and Criteria**, allowing efficient and flexible database queries.
 
 ### 6. Role-Based Authorization
 
