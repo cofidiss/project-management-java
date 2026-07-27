@@ -5,7 +5,17 @@
 
 ## Project Workflow
 
-### 1. User Authentication
+### 1. API Gateway
+
+The application follows a **microservices architecture** with a dedicated **API Gateway** implemented as a separate Spring Boot project.
+
+The API Gateway acts as the single entry point for external client requests and routes incoming requests to the appropriate backend services.
+
+The main Spring Boot application is **not directly exposed to the outside network**. External requests can only reach the backend through the API Gateway.
+
+Communication between the **API Gateway** and the **Spring Boot application** is secured using a shared **secret key**. The API Gateway includes the secret in a custom HTTP header when forwarding requests, and the backend validates this header to ensure that requests originate from the trusted API Gateway.
+
+### 2. User Authentication
 
 Users can register and log in through the React application.
 
@@ -15,7 +25,7 @@ After successful authentication, the server issues a **JWT** stored in an **HTTP
 
 Protected endpoints require authentication and enforce role-based authorization (**READY** and **MODIFY**).
 
-### 2. Project Management
+### 3. Project Management
 
 Users with the **MODIFY** permission can create, update, and delete projects.
 
@@ -23,31 +33,31 @@ Projects can be filtered by **project name**, **status**, **category**, **planne
 
 Users with the **READY** permission have **read-only** access.
 
-### 3. Task Management
+### 4. Task Management
 
 Each project contains multiple **tasks**, and every task can include **subtasks**.
 
 Users with the **MODIFY** permission can create, update, and delete tasks and subtasks.
 
-### 4. Automatic Project Status Management
+### 5. Automatic Project Status Management
 
 The project status is automatically synchronized with its tasks.
 
-- When the first task changes to **In Progress**, the project status automatically becomes **In Progress**.
-- The project's **Actual Start Date** is filled automatically.
-- When **all tasks** are marked as **Completed**, the project status automatically becomes **Completed**.
-- The project's **Actual End Date** is filled automatically.
+* When the first task changes to **In Progress**, the project status automatically becomes **In Progress**.
+* The project's **Actual Start Date** is filled automatically.
+* When **all tasks** are marked as **Completed**, the project status automatically becomes **Completed**.
+* The project's **Actual End Date** is filled automatically.
 
-### 5. Advanced Filtering
+### 6. Advanced Filtering
 
-Projects support dynamic filtering using **Jpa and Criteria**, allowing efficient and flexible database queries.
+Projects support dynamic filtering using **JPA Criteria API**, allowing efficient and flexible database queries.
 
-### 6. Role-Based Authorization
+### 7. Role-Based Authorization
 
-- **READY** users can only view projects and tasks.
-- **MODIFY** users can create, update, and delete projects, tasks, and subtasks.
+* **READY** users can only view projects and tasks.
+* **MODIFY** users can create, update, and delete projects, tasks, and subtasks.
 
-### 7. Docker Deployment
+### 8. Docker Deployment
 
 The application and its required services are containerized using **Docker**.
 
@@ -57,4 +67,6 @@ To stop the application:
 
 ```bash
 docker compose down
+```
+
 ```
