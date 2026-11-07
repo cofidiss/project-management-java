@@ -6,13 +6,11 @@ import com.projectmanagement.domain.model.GenericApiResponse;
 import com.projectmanagement.domain.util.CustomUtil;
 import com.projectmanagement.repository.interfaces.IUserRepository;
 import com.projectmanagement.service.DTO.SignUpRequestDto;
-import com.projectmanagement.service.config.JwtConfig;
 import com.projectmanagement.service.interfaces.IUserService;
 import com.projectmanagement.service.mapper.IUserMapper;
 import org.springframework.http.ResponseCookie;
 import org.springframework.stereotype.Service;
 
-import java.time.Duration;
 import java.util.Objects;
 import java.util.Optional;
 @Service
@@ -35,7 +33,8 @@ public class UserService implements IUserService {
                 .filter(user -> verifyPassword(password, user.getPassword()));
 
       if(userOpt.isPresent()){
-          apiResponse.setSuccessData(jwtUtil.createCookie( userOpt.get().getId()));
+          var user = userOpt.get();
+          apiResponse.setSuccessData(jwtUtil.createCookie(user.getId()));
       }
       else {
           apiResponse.setErrorData("login unsuccess");
@@ -61,10 +60,12 @@ public class UserService implements IUserService {
         Optional<UserEntity> userOpt = userRepository.findByUsername(signUpRequest.getUsername());
 
         if(userOpt.isPresent()){
-            apiResponse.setSuccessData(jwtUtil.createCookie(userOpt.get().getId()));
+            var user = userOpt.get();
+            apiResponse.setSuccessData(jwtUtil.createCookie(user.getId()));
         }
         return apiResponse;
     }
+
 
     @Override
     public boolean hasPermission(Long userId, RoleEnum required) {

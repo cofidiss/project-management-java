@@ -22,5 +22,8 @@ security:
   jwt:
     secret: 1234567890
     expirationTime: 3000000
+  gateway:
+    shared-secret: ${GATEWAY_SHARED_SECRET:project-management-gateway-secret}
+    shared-header: X-Gateway-Auth
 server:
-  port: 3000
+  port: 8080

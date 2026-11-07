@@ -70,13 +70,10 @@ var entityToUpdate =  projectMapper.toProjectEntity(updateProjectRequestDto,optE
             genericApiResponse.setErrorData("project did not found ");
             return  genericApiResponse;
         }
-        projectRepository.deleteById(id);
+
        var taskToDelete =  taskRepository.findByProjectId(id);
-        taskRepository.deleteAllById( taskToDelete.stream()
-                .map(TaskEntity::getId)
-                .collect(Collectors.toList()));
-
-
+    taskRepository.deleteAll(taskToDelete);
+    projectRepository.deleteById(id);
         return genericApiResponse;
 
     }

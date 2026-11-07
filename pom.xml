@@ -23,7 +23,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>17</java.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
-    <jackson.version>2.15.0</jackson.version>
+        <jackson.version>2.15.0</jackson.version>
         <spring.version>3.3.0</spring.version>
         <openapi.version>2.2.0</openapi.version>
         <postgresql.version>42.7.3</postgresql.version>

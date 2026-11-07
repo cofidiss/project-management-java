@@ -76,7 +76,7 @@ public class UserController {
     public ResponseEntity<?>  getUserRole(HttpServletResponse response) {
         var auth = SecurityContextHolder.getContext().getAuthentication();
 
-        if(auth.getPrincipal() instanceof Long userId ){
+        if (auth != null && auth.getPrincipal() instanceof Long userId) {
             var result = userService.getUserRole(userId);
             return ResponseEntity.status(result.getStatusCode()).body(result.getSuccessData());
         }

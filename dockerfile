@@ -12,6 +12,5 @@ WORKDIR /app
 
 COPY --from=build /app/controller/target/controller-1.0-SNAPSHOT.jar app.jar
 
-EXPOSE 3000
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
